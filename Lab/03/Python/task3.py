@@ -1,0 +1,7 @@
+a = float(input("a = "))
+b = float(input("b = "))
+print("a + b = " + str(a + b))
+print("a - b = " + str(a - b))
+print("a * b = " + str(a * b))
+print("a / b = " + str(a / b))
+input()
