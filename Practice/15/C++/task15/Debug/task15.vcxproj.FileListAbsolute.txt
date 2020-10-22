@@ -1,0 +1,2 @@
+E:\Programing\Practice\15\C++\task15\Debug\task15.exe
+E:\Programing\Practice\15\C++\task15\Debug\task15.pdb

@@ -1,0 +1,3 @@
+﻿  task11.cpp
+E:\Programing\Lab\11\C++\task11\task11.cpp(1,9): warning C4067: непредвиденные лексемы за директивой препроцессора, требуется newline
+  task11.vcxproj -> E:\Programing\Lab\11\C++\task11\Debug\task11.exe
