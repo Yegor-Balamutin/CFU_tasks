@@ -81,20 +81,25 @@ d = [   # 26 str * 28 chr
     [False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,True,False,False,False,False]
 ]
 exits = {'A': False, 'B': False, 'C': False, 'D': False, 'E': False, 'F': False}
-i,j = input("Координаты: ").split(" ")
+j,i = input("Координаты: ").split(" ")
 i = int(i)
 j = int(j)
-if (i < 0) or (i > 24) or (j < 0) or (j > 26) or (maze[i][j] == "#"):
-    print("Неверные координаты")
+if (i < 0) or (i > 24) or (j < 0) or (j > 26):
+    print("Неверные координаты: за пределами лабиринта")
+elif (maze[i][j] == "#"):
+    print("Неверные координаты: стена")
 else:
     if (maze[i][j] >= 'A') and (maze[i][j] <= 'F'):
         exits[maze[i][j]] = True
     fill(i,j)
-    print("Доступные выходы: ", end = "")
+    s = ""
     a = ord('A')
     while (a <= ord('F')):
         if (exits[chr(a)]):
-            print(chr(a), end = " ")
+            s = s + " " + chr(a)
         a += 1
-print()
+    if (s == ""):
+        print("Выхода нет.")
+    else:
+        print("Доступные выходы:" + s)
 input("Нажмите Enter")
