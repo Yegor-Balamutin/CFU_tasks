@@ -6,7 +6,7 @@
 
 | Практические | Лабораторные |
 | ------------ | ------------ |
-| Практическая 1 - [[1C++]]() [[Python]]() | ------------ |
+| Практическая 1 - [[C++]][c1]: [[Python]]() | ------------ |
 | Практическая 2 - [[C++]]() [[Python]]() | ------------ |
 | Практическая 3 - [[C++]]() [[Python]]() | ------------ |
 | Практическая 4 - [[C++]]() [[Python]]() | ------------ |
@@ -29,4 +29,4 @@
 | Практическая 21 - [[C++]]() [[Python]]() | ------------ |
 | Практическая 22 - [[C++]]() [[Python]]() | ------------ |
 
-[[1C++]]:https://github.com/Yegor-Balamutin/CFU_tasks/blob/master/Practice/01/C%2B%2B/задание%201/ConsoleApplication1/ConsoleApplication1.cpp
+[c1]:https://github.com/Yegor-Balamutin/CFU_tasks/blob/master/Practice/01/C%2B%2B/задание%201/ConsoleApplication1/ConsoleApplication1.cpp
