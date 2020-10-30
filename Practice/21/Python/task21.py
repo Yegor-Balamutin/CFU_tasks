@@ -11,7 +11,8 @@ def print_bmi(bmi):
 	else:
 		print("ожирение")
 
-h = (float(input("Рост: "))) / 100
-w = float(input("вес: "))
+w,h = input().split()
+w = float(w)
+h = float(h) / 100
 print_bmi(bmi(w, h))
 input("Нажмите Enter")

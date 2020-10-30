@@ -1,8 +1,9 @@
-s = int(input("s = "))
-l1 = int(input("l1 = "))
-r1 = int(input("r1 = "))
-l2 = int(input("l2 = "))
-r2 = int(input("l2 = "))
+s,l1,r1,l2,r2, = input().split(" ")
+s = int(s)
+l1 = int(l1)
+r1 = int(r1)
+l2 = int(l2)
+r2 = int(r2)
 x1 = l1
 x2 = s - x1
 if (x2 >= l2) and (x2 <= r2):

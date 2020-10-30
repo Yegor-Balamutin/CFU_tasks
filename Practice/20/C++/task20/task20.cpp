@@ -23,20 +23,14 @@ int main()
 	cout << "Количество видов напитков в магазине: ";
 	cin >> k;
 	for (int i = 0; i < k; i++) {   // цикл ввода данных и рассчёта цены за литр
-		cout << endl << i + 1 << " напиток: \n";
-		cout << "название: ";
-		cin >> na;
-		cout << "цена: ";
-		cin >> pr;
-		cout << "объём: ";
-		cin >> vo;
+		cout << i + 1 << " напиток: ";
+		cin >> na >> pr >> vo;
 		name.push_back(na);
 		price.push_back(pr);
 		volume.push_back(vo);
 		purch.push_back(0);
 		d[i] = pr / vo;
 	}
-	cout << endl;
 	while (size(d) > 0) {   // цикл составления списка порядка покупок
 		m = 1000000;
 		for (auto i: d) {

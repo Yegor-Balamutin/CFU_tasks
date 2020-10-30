@@ -31,10 +31,7 @@ int main()
 {
 	double w, h;
 	setlocale(LC_ALL, "Russian");
-	cout << "Рост: ";
-	cin >> h;
-	cout << "Вес: ";
-	cin >> w;
+	cin >> w >> h;
 	h /= 100;
 	printBMI(BMI(w, h));
 	return 0;

@@ -6,10 +6,10 @@ order = []   # список ключей, показывающий в каком
 drinks = {}   # словарь напитков: 0: "назв", цена, объём
 d = {}   # цена за литр для каждого напитка
 for i in range(k):
-	print(str(i + 1) + ":")
-	name = input("название: ")
-	price = int(input("цена: "))
-	volume = int(input("объём: "))
+	print(str(i + 1) + ": ", end = "")
+	name, price, volume = input().split(" ")
+	price = int(price)
+	volume = int(volume)
 	drinks[i] = (name, price, volume)
 	d[i] = price / volume
 	purchase[i] = 0
