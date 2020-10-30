@@ -24,7 +24,7 @@
 | Практическая 16 - [[C++]][c16]: [[Python]][p16]: | ------------ |
 | Практическая 17 - [[C++]][c17]: [[Python]][p17]: | ------------ |
 | Практическая 18 - [[C++]][c18]: [[Python]][p18]: | ------------ |
-| Практическая 19 - [[C++]][c19]:() [[Python]][p19]:() | ------------ |
+| Практическая 19 - [[C++]]() [[Python]]() | ------------ |
 | Практическая 20 - [[C++]][c20]: [[Python]][p20]: | ------------ |
 | Практическая 21 - [[C++]][c21]: [[Python]][p21]: | ------------ |
 | Практическая 22 - [[C++]][c22]: [[Python]][p22]: | ------------ |
@@ -47,7 +47,6 @@
 [c16]:https://github.com/Yegor-Balamutin/CFU_tasks/blob/master/Practice/16/C%2B%2B/task16/task16.cpp
 [c17]:https://github.com/Yegor-Balamutin/CFU_tasks/blob/master/Practice/17/C%2B%2B/task17/task17.cpp
 [c18]:https://github.com/Yegor-Balamutin/CFU_tasks/blob/master/Practice/18/C%2B%2B/task18/task18.cpp
-[c19]:
 [c20]:https://github.com/Yegor-Balamutin/CFU_tasks/blob/master/Practice/20/C%2B%2B/task20/task20.cpp
 [c21]:https://github.com/Yegor-Balamutin/CFU_tasks/blob/master/Practice/21/C%2B%2B/task21/task21.cpp
 [c22]:https://github.com/Yegor-Balamutin/CFU_tasks/blob/master/Practice/22/C%2B%2B/task22/task22.cpp
@@ -70,7 +69,6 @@
 [p16]:https://github.com/Yegor-Balamutin/CFU_tasks/blob/master/Practice/16/Python/task16.py
 [p17]:https://github.com/Yegor-Balamutin/CFU_tasks/blob/master/Practice/17/Python/task17.py
 [p18]:https://github.com/Yegor-Balamutin/CFU_tasks/blob/master/Practice/18/Python/task18.py
-[p19]:
 [p20]:https://github.com/Yegor-Balamutin/CFU_tasks/blob/master/Practice/20/Python/task20.py
 [p21]:https://github.com/Yegor-Balamutin/CFU_tasks/blob/master/Practice/21/Python/task21.py
 [p22]:https://github.com/Yegor-Balamutin/CFU_tasks/blob/master/Practice/22/Python/task22.py
