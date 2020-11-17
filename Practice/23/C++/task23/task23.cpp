@@ -15,8 +15,13 @@ int main()
 	std::cout << std::endl;
 	std::cout << "x\t sin(x)\n";
 	for (int i = 1; i < 47; i++) {
-		std::cout << std::steprecision(4) << x << "\t " << sinx(x,5) << "\n";
+		std::cout << std::setprecision(4) << x << "\t " << sinx(x,5) << "\n";
 		x += pi / 180;
+	}
+	std::cout << std::endl;
+	std::cout << "k\t C(k, 10)\n";
+	for (int k = 1; k <= 10; k++) {
+		std::cout << k << "\t " << comb(k, 10) << "\n";
 	}
 	return 0;
 }

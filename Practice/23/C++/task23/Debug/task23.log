@@ -1,5 +1,2 @@
 ﻿  task23.cpp
-E:\Programing\Practice\23\C++\task23\task23.cpp(18,21): error C2039: "steprecision": не является членом "std".
-E:\VS\VC\Tools\MSVC\14.28.29333\include\iomanip(23): message : см. объявление "std"
-E:\Programing\Practice\23\C++\task23\task23.cpp(18,33): error C3861: steprecision: идентификатор не найден
-E:\Programing\Practice\23\C++\task23\task23.cpp(18,59): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
+  task23.vcxproj -> E:\Programing\Practice\23\C++\task23\Debug\task23.exe

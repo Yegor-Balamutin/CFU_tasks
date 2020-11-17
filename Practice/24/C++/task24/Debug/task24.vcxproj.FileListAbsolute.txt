@@ -1,0 +1,2 @@
+E:\Programing\Practice\24\C++\task24\Debug\task24.exe
+E:\Programing\Practice\24\C++\task24\Debug\task24.pdb
