@@ -1,3 +1,0 @@
-﻿  task15.cpp
-E:\Programing\Practice\15\C++\task15\task15.cpp(8,12): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
-  task15.vcxproj -> E:\Programing\Practice\15\C++\task15\Debug\task15.exe

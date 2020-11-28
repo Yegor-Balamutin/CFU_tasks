@@ -1,2 +1,0 @@
-E:\Programing\Practice\22\C++\task22\Debug\task22.exe
-E:\Programing\Practice\22\C++\task22\Debug\task22.pdb

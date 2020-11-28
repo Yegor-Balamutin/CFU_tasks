@@ -1,7 +1,0 @@
-﻿  task20.cpp
-E:\Programing\Practice\20\C++\task20\task20.cpp(38,10): warning C4244: =: преобразование "_Ty2" в "int", возможна потеря данных
-          with
-          [
-              _Ty2=double
-          ]
-  task20.vcxproj -> E:\Programing\Practice\20\C++\task20\Debug\task20.exe

@@ -1,4 +1,0 @@
-﻿  task9.cpp
-E:\Programing\Lab\09\C++\task9\task9.cpp(1,9): warning C4067: непредвиденные лексемы за директивой препроцессора, требуется newline
-E:\Programing\Lab\09\C++\task9\task9.cpp(2,9): warning C4067: непредвиденные лексемы за директивой препроцессора, требуется newline
-  task9.vcxproj -> E:\Programing\Lab\09\C++\task9\Debug\task9.exe
