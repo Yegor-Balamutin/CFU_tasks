@@ -28,11 +28,17 @@ int main()
 void gen_response(const Request& req, Response& res) {
 	std::cout << "receuved a request on \"/\"\n";
 	int ctime = t_request();
+	json emp = {};
 	json weather;
 	std::ifstream file1("cache.json");
 	if (not(file1.is_open())) {   // если кеш отсутствует то запрашиваем и помещаем ответ в wether
-		std::cout << "cache is empty\n";
+		std::cout << "cache is not found\n";
 		weather = w_request();
+		if (weather == emp) {
+			std::cout << "weather is not recived\n";
+			std::cout << "function gen_response finished.\n\n";
+			return ;
+		}
 	}
 	else {
 		std::cout << "cache is normal\n";
@@ -43,6 +49,11 @@ void gen_response(const Request& req, Response& res) {
 	if (t == 48) {      // если t == 48 то кеш устарел
 		std::cout << "cache is old\n";
 		weather = w_request();
+		if (weather == emp) {
+			std::cout << "weather is not recived\n";
+			std::cout << "function gen_response finished.\n\n";
+			return;
+		}
 		t = check_cache(weather, ctime);
 	}
 	if (t > -1) {            // если t == -1 значит небыло получено время
@@ -69,11 +80,17 @@ void gen_response(const Request& req, Response& res) {
 void gen_response_raw(const Request& req, Response& res) {
 	std::cout << "receuved a request on \"/raw\"\n";
 	int ctime = t_request();
+	json emp = {};
 	json weather;
 	std::ifstream file1("cache.json");
 	if (not(file1.is_open())) {   // если кеш отсутствует то запрашиваем и помещаем ответ в wether
-		std::cout << "cache is empty\n";
+		std::cout << "cache is not found\n";
 		weather = w_request();
+		if (weather == emp) {
+			std::cout << "weather is not recived\n";
+			std::cout << "function gen_response_raw finished.\n\n";
+			return;
+		}
 	}
 	else {
 		std::cout << "cache is normal\n";
@@ -84,6 +101,11 @@ void gen_response_raw(const Request& req, Response& res) {
 	if (t == 48) {      // если t == 48 то кеш устарел
 		std::cout << "cache is old\n";
 		weather = w_request();
+		if (weather == emp) {
+			std::cout << "weather is not recived\n";
+			std::cout << "function gen_response_raw finished.\n\n";
+			return;
+		}
 		t = check_cache(weather, ctime);
 	}
 	if (t > -1) {          // если t == -1 значит небыло получено время
@@ -142,7 +164,7 @@ int check_cache(json cashe, int utime) {
 	}
 	else {
 		im = -1;
-		std::cout << "invalid time\n";
+		std::cout << "time is not recived\n";
 	}
 	return im;
 }

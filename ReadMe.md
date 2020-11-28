@@ -6,7 +6,7 @@
 
 | Практические | Лабораторные |
 | ------------ | ------------ |
-| Практическая 1 - [[C++]][c1]: [[Python]][p1]: | ------------ |
+| Практическая 1 - [[C++]][c1]: [[Python]][p1]: | [[Lab 1]][l1] |
 | Практическая 2 - [[C++]][c2]: [[Python]][p2]: | ------------ |
 | Практическая 3 - [[C++]][c3]: [[Python]][p3]: | ------------ |
 | Практическая 4 - [[C++]][c4]: [[Python]][p4]: | ------------ |
@@ -28,6 +28,8 @@
 | Практическая 20 - [[C++]][c20]: [[Python]][p20]: | ------------ |
 | Практическая 21 - [[C++]][c21]: [[Python]][p21]: | ------------ |
 | Практическая 22 - [[C++]][c22]: [[Python]][p22]: | ------------ |
+| Практическая 23 - [[C++]][c23]: ------ | ------------ |
+| Практическая 24 - [[C++]][c24]: [[Python]][p24]: | ------------ |
 
 [c1]:https://github.com/Yegor-Balamutin/CFU_tasks/blob/master/Practice/01/C%2B%2B/задание%201/ConsoleApplication1/ConsoleApplication1.cpp
 [c2]:https://github.com/Yegor-Balamutin/CFU_tasks/blob/master/Practice/02/C%2B%2B/задание%202/ConsoleApplication2/ConsoleApplication2.cpp
@@ -50,6 +52,8 @@
 [c20]:https://github.com/Yegor-Balamutin/CFU_tasks/blob/master/Practice/20/C%2B%2B/task20/task20.cpp
 [c21]:https://github.com/Yegor-Balamutin/CFU_tasks/blob/master/Practice/21/C%2B%2B/task21/task21.cpp
 [c22]:https://github.com/Yegor-Balamutin/CFU_tasks/blob/master/Practice/22/C%2B%2B/task22/task22.cpp
+[c23]:https://github.com/Yegor-Balamutin/CFU_tasks/tree/master/Practice/23/C%2B%2B/task23
+[c24]:https://github.com/Yegor-Balamutin/CFU_tasks/blob/master/Practice/24/C%2B%2B/task24/task24.cpp
 
 [p1]:https://github.com/Yegor-Balamutin/CFU_tasks/blob/master/Practice/01/Python/задание%201.py
 [p2]:https://github.com/Yegor-Balamutin/CFU_tasks/blob/master/Practice/02/Python/задание%202.py
@@ -72,3 +76,6 @@
 [p20]:https://github.com/Yegor-Balamutin/CFU_tasks/blob/master/Practice/20/Python/task20.py
 [p21]:https://github.com/Yegor-Balamutin/CFU_tasks/blob/master/Practice/21/Python/task21.py
 [p22]:https://github.com/Yegor-Balamutin/CFU_tasks/blob/master/Practice/22/Python/task22.py
+[p24]:https://github.com/Yegor-Balamutin/CFU_tasks/blob/master/Practice/24/Python/task24.py
+
+[l1]:https://github.com/Yegor-Balamutin/CFU_tasks/tree/master/Lab/Lab%201
