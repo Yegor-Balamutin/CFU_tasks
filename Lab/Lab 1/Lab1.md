@@ -52,4 +52,4 @@
 
 Вначале я зарегестрировался на сервисе openweathermap.org и в разделе API key получил свой ключ API: "bad75ef80333e8205e98138e6836321a".
 
-!(image/api_key.jpg "Получение ключа API")
+![API](image/api_key.jpg "Получение ключа API")
