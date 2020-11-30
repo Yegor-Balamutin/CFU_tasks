@@ -50,6 +50,21 @@
 
 ## Выполнение работы
 
-Вначале я зарегестрировался на сервисе openweathermap.org и в разделе API key получил свой ключ API: "bad75ef80333e8205e98138e6836321a".
+Вначале я зарегестрировался на сервисе openweathermap.org и в разделе API key получил свой ключ API: `"bad75ef80333e8205e98138e6836321a"`
 
 ![API](image/api_key.jpg "Получение ключа API")
+<p align="center">Рис 1. Получение ключа API</p>
+
+Затем на странице  http://openweathermap.org/appid#use сервиса я изучил инструкции по работе с ключом API и созданию http-запросов. 
+После этого я смог составить следующий запрос:
+
+`"https://api.openweathermap.org/data/2.5/onecall?lat=44.9572&lon=34.1108&units=metric&exclude=current,minutely,daily,alerts&lang=ru&appid=bad75ef80333e8205e98138e6836321a"`
+
+где:
+*lat - широта
+*lon - долгота
+*lang - язык
+*units - система мер
+*exclude - поля, которые нужно исключить из ответа
+
+При вводе этого запроса
