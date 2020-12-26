@@ -1,3 +1,5 @@
 {
-  "webhooks": ["https://www.google.ru","https://yandex.ru","https://mail.ru"]
+  "webhooks": [
+    "https://www.google.ru"
+  ]
 }
