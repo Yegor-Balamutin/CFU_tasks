@@ -538,16 +538,16 @@ void gen_res_alice(const Request& req, Response& res) {
 
 Демонстрация работы некоторых функций навыка:
 
-![](materials/help)
+![](materials/help.jpg)
 <p align="center">Рис 4. Функция "помощь"</p>
 
-![](materials/add_n_sum)
+![](materials/add_n_sum.jpg)
 <p align="center">Рис 5. Функции "добавить" и "сумма"</p>
 
-![](materials/del_n_show)
+![](materials/del_n_show.jpg)
 <p align="center">Рис 6. Функции "что в корзине" и "удалить"</p>
 
-![](materials/clear)
+![](materials/clear.jpg)
 <p align="center">Рис 7. Функция "очистить корзину"</p>
 
 Отдельно стоит выделить команду "Покупка завершена". Если поступила эта команда, то сессия завершается, а на все зарегестрированные 
