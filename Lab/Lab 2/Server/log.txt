@@ -1,2 +1,0 @@
-starting function
-conf file is opened

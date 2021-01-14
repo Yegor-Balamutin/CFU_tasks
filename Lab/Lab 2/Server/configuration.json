@@ -1,5 +1,6 @@
 {
   "webhooks": [
-    "https://www.google.ru"
+    "https://webhook.site/6652655f-4f8c-46c4-807a-7d9f07df5c97",
+    "http://127.0.0.1:5000"
   ]
 }
