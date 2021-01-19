@@ -7,8 +7,8 @@
 | Практические | Лабораторные |
 | ------------ | ------------ |
 | Практическая 1 - [[C++]][c1]: [[Python]][p1]: | [[Lab 1]][l1] |
-| Практическая 2 - [[C++]][c2]: [[Python]][p2]: | ------------ |
-| Практическая 3 - [[C++]][c3]: [[Python]][p3]: | ------------ |
+| Практическая 2 - [[C++]][c2]: [[Python]][p2]: | [[Lab 2]][l2] |
+| Практическая 3 - [[C++]][c3]: [[Python]][p3]: | [[Lab 3]][l3] |
 | Практическая 4 - [[C++]][c4]: [[Python]][p4]: | ------------ |
 | Практическая 5 - [[C++]][c5]: [[Python]][p5]: | ------------ |
 | Практическая 6 - [[C++]][c6]: [[Python]][p6]: | ------------ |
@@ -30,6 +30,12 @@
 | Практическая 22 - [[C++]][c22]: [[Python]][p22]: | ------------ |
 | Практическая 23 - [[C++]][c23]: ------ | ------------ |
 | Практическая 24 - [[C++]][c24]: [[Python]][p24]: | ------------ |
+| Практическая 25 - [[C++]][c25]: [[Python]][p25]: | ------------ |
+| Практическая 26 - [[C++]][c26]: [[Python]][p26] | ------------ |
+| Практическая 27 - [[C++]][c27]: [[Python]][p27]: | ------------ |
+| Практическая 28 - [[C++]][c28]: [[Python]][p28]: | ------------ |
+| Практическая 29 - [[C++]][c29]: ------ | ------------ |
+| Практическая 30 - [[C++]][c30]: ------ | ------------ |
 
 [c1]:https://github.com/Yegor-Balamutin/CFU_tasks/blob/master/Practice/01/C%2B%2B/задание%201/ConsoleApplication1/ConsoleApplication1.cpp
 [c2]:https://github.com/Yegor-Balamutin/CFU_tasks/blob/master/Practice/02/C%2B%2B/задание%202/ConsoleApplication2/ConsoleApplication2.cpp
@@ -54,6 +60,12 @@
 [c22]:https://github.com/Yegor-Balamutin/CFU_tasks/blob/master/Practice/22/C%2B%2B/task22/task22.cpp
 [c23]:https://github.com/Yegor-Balamutin/CFU_tasks/tree/master/Practice/23/C%2B%2B/task23
 [c24]:https://github.com/Yegor-Balamutin/CFU_tasks/blob/master/Practice/24/C%2B%2B/task24/task24.cpp
+[c25]:https://github.com/Yegor-Balamutin/CFU_tasks/blob/master/Practice/25/C%2B%2B/task25/task25.cpp
+[c26]:https://github.com/Yegor-Balamutin/CFU_tasks/blob/master/Practice/26/C%2B%2B/task26/task26.cpp
+[c27]:https://github.com/Yegor-Balamutin/CFU_tasks/blob/master/Practice/27/C%2B%2B/task27/task27.cpp
+[c28]:https://github.com/Yegor-Balamutin/CFU_tasks/blob/master/Practice/28/C%2B%2B/task28/task28.cpp
+[c29]:https://github.com/Yegor-Balamutin/CFU_tasks/blob/master/Practice/29/C%2B%2B/task29/task29.cpp
+[c30]:https://github.com/Yegor-Balamutin/CFU_tasks/blob/master/Practice/30/C%2B%2B/task30/task30.cpp
 
 [p1]:https://github.com/Yegor-Balamutin/CFU_tasks/blob/master/Practice/01/Python/задание%201.py
 [p2]:https://github.com/Yegor-Balamutin/CFU_tasks/blob/master/Practice/02/Python/задание%202.py
@@ -77,5 +89,11 @@
 [p21]:https://github.com/Yegor-Balamutin/CFU_tasks/blob/master/Practice/21/Python/task21.py
 [p22]:https://github.com/Yegor-Balamutin/CFU_tasks/blob/master/Practice/22/Python/task22.py
 [p24]:https://github.com/Yegor-Balamutin/CFU_tasks/blob/master/Practice/24/Python/task24.py
+[p25]:https://github.com/Yegor-Balamutin/CFU_tasks/blob/master/Practice/25/Python/task25.py
+[p26]:https://github.com/Yegor-Balamutin/CFU_tasks/blob/master/Practice/26/Python/task26.py
+[p27]:https://github.com/Yegor-Balamutin/CFU_tasks/blob/master/Practice/27/Python/task27.py
+[p28]:https://github.com/Yegor-Balamutin/CFU_tasks/blob/master/Practice/28/Python/task28.py
 
 [l1]:https://github.com/Yegor-Balamutin/CFU_tasks/tree/master/Lab/Lab%201
+[l2]:https://github.com/Yegor-Balamutin/CFU_tasks/tree/master/Lab/Lab%202
+[l3]:https://github.com/Yegor-Balamutin/CFU_tasks/tree/master/Lab/Lab%203
