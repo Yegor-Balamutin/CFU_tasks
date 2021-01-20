@@ -54,7 +54,7 @@ def check(r, c):
 
 def clic(event):
     global game_stat, chosen_ball
-    if (game_stat):
+    if (game_stat == 1):
         if (chosen_ball == [-1, -1]):        # Если нет выбранного шара
             if (event.widget.ball != -1):          # Если в клетке есть шар
                 # то устанавливаем выбраный шар
@@ -183,7 +183,7 @@ def remove_balls(start, direct, dir_len, abs_len):
     col = start[1]
     if (direct == "w"):
         col -= dir_len - 1
-        for i in range(abs_len):
+        for i in range(5):
             lbls_matrix[row][col]["image"] = cell_pas
             lbls_matrix[row][col].ball = -1
             col += 1
@@ -191,7 +191,7 @@ def remove_balls(start, direct, dir_len, abs_len):
     elif (direct == "nw"):
         row -= dir_len - 1
         col -= dir_len - 1
-        for i in range(abs_len):
+        for i in range(5):
             lbls_matrix[row][col]["image"] = cell_pas
             lbls_matrix[row][col].ball = -1
             row += 1
@@ -199,7 +199,7 @@ def remove_balls(start, direct, dir_len, abs_len):
             number["text"] += 2
     elif (direct == "n"):
         row -= dir_len - 1
-        for i in range(abs_len):
+        for i in range(5):
             lbls_matrix[row][col]["image"] = cell_pas
             lbls_matrix[row][col].ball = -1
             row += 1
@@ -207,7 +207,7 @@ def remove_balls(start, direct, dir_len, abs_len):
     elif (direct == "ne"):
         row -= dir_len - 1
         col += dir_len - 1
-        for i in range(abs_len):
+        for i in range(5):
             lbls_matrix[row][col]["image"] = cell_pas
             lbls_matrix[row][col].ball = -1
             row += 1
@@ -215,6 +215,7 @@ def remove_balls(start, direct, dir_len, abs_len):
             number["text"] += 2
 
 def turn():
+    global game_stat
     avbl_cells = []
     for i in range(len(lbls_list)):
         if (lbls_list[i].ball == -1): avbl_cells.append(lbls_list[i])
