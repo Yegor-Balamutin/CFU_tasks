@@ -103,11 +103,11 @@ class Point:
   
 class Vector
 
-    double length(){
+     length()
         return sqrt(x*x + y*y);
-    }
+    
 
-    // operators -------------------
+    # operators -------------------
     bool operator==(Vector b) {
         if ((fabs(this->x - b.x) <= 0.0000000001) && (fabs(this->y - b.y) <= 0.0000000001)) return true;
         else return false;
