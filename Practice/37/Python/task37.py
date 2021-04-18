@@ -101,49 +101,62 @@ class Point:
         self.set_new_x_y(self.r, self.phi)
  
   
-class Vector
+class Vector:
+    def __init__(self, begin=None, end=None):
+        if begin == None:
+            self.x1 = 0
+            self.y1 = 0
+            self.x2 = 1
+            self.y2 = 0
+        elif begin != None and end == None:
+            self.x1 = 0
+            self.y1 = 0
+            self.x2 = begin.x
+            self.y2 = begin.y
+        elif begin != None and end != None:
+            self.x1 = begin.x
+            self.y1 = begin.y
+            self.x2 = end.x
+            self.y2 = end.y
 
-     length()
-        return sqrt(x*x + y*y);
+    def length(self):
+        return ((self.x2 - self.x1)**2 + (self.y2 - self.y1)**2) ** 0.5
+    
+    def __eq__(self, other):
+        if (fabs(this->x - b.x) <= 0.0000000001) && (fabs(this->y - b.y) <= 0.0000000001): return True
+        else: return False
     
 
-    # operators -------------------
-    bool operator==(Vector b) {
-        if ((fabs(this->x - b.x) <= 0.0000000001) && (fabs(this->y - b.y) <= 0.0000000001)) return true;
-        else return false;
-    }
+    def __neg__(self):
+        v = Vector()
+        v.x = -self.x
+        v.y = -self.y
+        return v
+    
 
-    Vector operator-(){
-        Vector v;
-        v.x = -x;
-        v.y = -y;
-        return v;
-    }
+    def __sub__(self, other):
+        Vector v
+        v.x = x - b.x
+        v.y = y - b.y
+        return v
 
-    Vector operator-(Vector b){
-        Vector v;
-        v.x = x - b.x;
-        v.y = y - b.y;
-        return v;
-    }
+    def __add__(self, other):
+        Vector v
+        v.x = x + b.x
+        v.y = y + b.y
+        return v
+    
 
-    Vector operator+(Vector b){
-        Vector v;
-        v.x = x + b.x;
-        v.y = y + b.y;
-        return v;
-    }
+    def __mul__(self, other):
+        Vector v
+        v.x = x * b
+        v.y = y * b
+        return v
+    
 
-    Vector operator*(double b){
-        Vector v;
-        v.x = x * b;
-        v.y = y * b;
-        return v;
-    }
-
-    double operator*(Vector b){
-        return x * b.x + y * b.y;
-    }
+    def __mul__(self, other):
+        return x * b.x + y * b.y
+    
 
   
   
