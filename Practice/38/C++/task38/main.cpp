@@ -4,31 +4,110 @@
 bool equal(double a, double b, double e = 1E-10);
 
 class Rational{
-public:
     int num;
     int denum;
-
+    int sign;
+public:
     Rational(){
         num = 0;
         denum = 1;
+        sign = 1;
     }
 
     Rational(int a, int b){
+        if ((a < 0 && b >= 0) || (b < 0 && a >= 0)) sign = -1;
+        else sign = 1;
+        a = abs(a);
+        b = abs(b);
+        reduction(a, b);
         num = a;
         denum = b;
     }
 
-    bool operator==(Rational b){
-        if (this->num == b.num && this->denum == b.denum) return true;
+    static int gcd(int a, int b){
+        if (a != 0 && b != 0){
+            a = abs(a);
+            b = abs(b);
+            while (a != b){
+                if (a > b) a -= b;
+                else b -= a;
+            }
+            return a;
+        } else if (a == 0 && b != 0) return b;
+        else return a;
+    }
+
+    static void reduction(int& a, int& b){
+        int gcd_val = gcd(a, b);
+        if (gcd_val != 0){
+            a /= gcd_val;
+            b /= gcd_val;
+        }
+    }
+
+    bool operator==(Rational r){
+        bool eq_numbers = false;
+        if ((*this).isNaN() || r.isNaN()) return false;
+        else if (this->num == 0 && r.num == 0) return true;
+        else if (this->denum == 0 && r.denum == 0) eq_numbers = true;
+        else if (this->num == r.num && this->denum == r.denum) eq_numbers = true;
+        else return false;
+        if (eq_numbers && (this->sign == r.sign)) return true;
         else return false;
     }
 
-    static int gcd(int a, int b){
-        while (a != b){
-            if (a > b) a -= b;
-            else b -= a;
+    Rational operator+(Rational r){
+        if (!(*this).isNaN() && !r.isNaN()){
+            if (this->denum == 0 || r.denum == 0) return Rational(1, 0);
+            int a = this->sign * this->num * r.denum + r.sign * r.num * this->denum;
+            int b = r.denum * this->denum;
+            reduction(a, b);
+            return Rational(a, b);
         }
-        return a;
+        else return Rational(0, 0);
+    }
+
+    Rational operator-(Rational r){
+        if (!(*this).isNaN() && !r.isNaN()){
+            int a = this->sign * this->num * r.denum - r.sign * r.num * this->denum;
+            int b = r.denum * this->denum;
+            reduction(a, b);
+            return Rational(a, b);
+        }
+        else return Rational(0, 0);
+    }
+
+    Rational operator*(Rational r){
+        int a = this->num * r.num * this->sign * r.sign;
+        int b = this->denum * r.denum;
+        reduction(a, b);
+        return Rational(a, b);
+    }
+
+    Rational operator/(Rational r){
+        int a = this->num * r.denum * this->sign * r.sign;
+        int b = this->denum * r.num;
+        reduction(a, b);
+        return Rational(a, b);
+    }
+
+    operator double() {
+        if (!(*this).isNaN() && (*this).denum != 0) return this->sign * this->num / this->denum;
+        else return 0;
+    }
+
+    operator bool() {
+        if ((*this).isNaN() || this->num == 0) return false;
+        else return true;
+    }
+
+    int numerator() {return this->num * this->sign;}
+
+    int denumerator() {return this->denum;}
+
+    bool isNaN(){
+        if (this->num == 0 && this->denum == 0) return true;
+        else return false;
     }
 };
 

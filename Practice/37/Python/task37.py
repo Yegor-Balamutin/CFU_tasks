@@ -37,12 +37,16 @@ class Point:
             self.set_new_x_y(self.r, self.phi)
 
     def __eq__(self, other):
+        if type(other) == type(self):
             if (abs(self.x - other.x) <= 0.0000000001) and (abs(self.y - other.y) <= 0.0000000001): return True
             else: return False
+        else: return False
 
     def __ne__(self, other):
-        if (abs(self.x - other.x) > 0.0000000001) and (abs(self.y - other.y) > 0.0000000001): return True
-        else: return False
+        if type(other) == type(self):
+            if (abs(self.x - other.x) > 0.0000000001) and (abs(self.y - other.y) > 0.0000000001): return True
+            else: return False
+        else: return True
 
     def __str__(self):
         return f"({self.x},{self.y})"
@@ -123,43 +127,62 @@ class Vector:
         return ((self.x2 - self.x1)**2 + (self.y2 - self.y1)**2) ** 0.5
     
     def __eq__(self, other):
-        if (fabs(this->x - b.x) <= 0.0000000001) && (fabs(this->y - b.y) <= 0.0000000001): return True
+        if type(other) == type(self):
+            if (abs((self.x2 - self.x1) - (other.x2 - other.x1)) <= 0.0000000001) and (abs((self.y2 - self.y1) - (other.y2 - other.y1)) <= 0.0000000001): return True
+            else: return False
         else: return False
     
 
     def __neg__(self):
         v = Vector()
-        v.x = -self.x
-        v.y = -self.y
+        v.x1 = self.x2
+        v.y1 = self.y2
+        v.x2 = self.x1
+        v.y2 = self.y1
         return v
     
 
     def __sub__(self, other):
-        Vector v
-        v.x = x - b.x
-        v.y = y - b.y
+        v = Vector()
+        v.x1 = self.x1 - other.x1
+        v.y1 = self.y1 - other.y1
+        v.x2 = self.x2 - other.x2
+        v.y2 = self.y2 - other.y2
         return v
 
     def __add__(self, other):
-        Vector v
-        v.x = x + b.x
-        v.y = y + b.y
+        v = Vector()
+        v.x1 = self.x1 + other.x1
+        v.y1 = self.y1 + other.y1
+        v.x2 = self.x2 + other.x2
+        v.y2 = self.y2 + other.y2
         return v
     
 
     def __mul__(self, other):
-        Vector v
-        v.x = x * b
-        v.y = y * b
-        return v
-    
+        v = Vector()
+        if (type(other) == type(1.1)) or (type(other) == type(1)):
+            v.x1 = self.x1
+            v.y1 = self.y1
+            v.x2 = self.x2
+            v.y2 = self.y2
 
-    def __mul__(self, other):
-        return x * b.x + y * b.y
-    
+            v.x2 -= v.x1
+            v.y2 -= v.y1
+            v.x2 *= other
+            v.y2 *= other
+            v.x2 += v.x1
+            v.y2 += v.y1
+            return v
+        elif type(other) == type(v): return ((self.x2 - self.x1) * (other.x2 - other.x1) + (self.y2 - self.y1) * (other.y2 - other.y1))
 
+    def prt(self):
+        print("x1:", self.x1)
+        print("y1:", self.y1)
+        print("x2:", self.x2)
+        print("y2:", self.y2)
   
-  
+
 a = Vector(Point(1, 2))
 b = Vector(Point(-2, 0), Point(-1, 2))
 if a == b and b == a: print('Equality test passed')
@@ -194,3 +217,4 @@ if (equal(ox*ox, ox.length()**2) and
     equal(oy*oy, oy.length()**2) and
     equal((ox*3 + oy*4)*(ox*3 + oy*4), (ox*3 + oy*4).length()**2)): print('Multiplication by Vector test passed')
 else: print('Multiplication by Vector test failed')
+input()

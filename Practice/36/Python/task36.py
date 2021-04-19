@@ -33,12 +33,16 @@ class Point:
             self.set_new_x_y(self.r, self.phi)
 
     def __eq__(self, other):
+        if type(other) == type(self):
             if (abs(self.x - other.x) <= 0.0000000001) and (abs(self.y - other.y) <= 0.0000000001): return True
             else: return False
+        else: return False
 
     def __ne__(self, other):
-        if (abs(self.x - other.x) > 0.0000000001) and (abs(self.y - other.y) > 0.0000000001): return True
-        else: return False
+        if type(other) == type(self):
+            if (abs(self.x - other.x) > 0.0000000001) and (abs(self.y - other.y) > 0.0000000001): return True
+            else: return False
+        else: return True
 
     def __str__(self):
         return f"({self.x},{self.y})"

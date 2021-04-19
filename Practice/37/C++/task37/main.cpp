@@ -101,62 +101,82 @@ public:
 
 class Vector{
 public:
-    double x;
-    double y;
+    double x1;
+    double y1;
+    double x2;
+    double y2;
 
     Vector(){
-        x = 1;
-        y = 0;
+        x1 = 0;
+        y1 = 0;
+        x2 = 1;
+        y2 = 0;
     }
     Vector(Point end){
-        x = end.get_x();
-        y = end.get_y();
+        x1 = 0;
+        y1 = 0;
+        x2 = end.get_x();
+        y2 = end.get_y();
     }
     Vector(Point begin, Point end){
-        x = end.get_x() - begin.get_x();
-        y = end.get_y() - begin.get_y();
+        x1 = begin.get_x();
+        y1 = begin.get_y();
+        x2 = end.get_x();
+        y2 = end.get_y();
     }
 
     double length(){
-        return sqrt(x*x + y*y);
+        return sqrt(sqr(x2 - x1) + sqr(y2 - y1));
     }
 
     // operators -------------------
     bool operator==(Vector b) {
-        if ((fabs(this->x - b.x) <= 0.0000000001) && (fabs(this->y - b.y) <= 0.0000000001)) return true;
+        double xa = this->x2 - this->x1;
+        double ya = this->y2 - this->y1;
+        double xb = b.x2 - b.x1;
+        double yb = b.y2 - b.y1;
+        if (((fabs(xa - xb)) <= 0.0000000001) && (fabs(ya - yb) <= 0.0000000001)) return true;
         else return false;
     }
 
     Vector operator-(){
-        Vector v;
-        v.x = -x;
-        v.y = -y;
+        Vector v = *this;
+        swap(v.x1, v.x2);
+        swap(v.y1, v.y2);
         return v;
     }
 
     Vector operator-(Vector b){
         Vector v;
-        v.x = x - b.x;
-        v.y = y - b.y;
+        v.x1 = x1 - b.x1;
+        v.y1 = y1 - b.y1;
+        v.x2 = x2 - b.x2;
+        v.y2 = y2 - b.y2;
         return v;
     }
 
     Vector operator+(Vector b){
         Vector v;
-        v.x = x + b.x;
-        v.y = y + b.y;
+        v.x1 = x1 + b.x1;
+        v.y1 = y1 + b.y1;
+        v.x2 = x2 + b.x2;
+        v.y2 = y2 + b.y2;
         return v;
     }
 
     Vector operator*(double b){
-        Vector v;
-        v.x = x * b;
-        v.y = y * b;
+        Vector v = *this;
+        v.x2 -= v.x1;
+        v.y2 -= v.y1;
+        v.x2 *= b;
+        v.y2 *= b;
+        v.x2 += v.x1;
+        v.y2 += v.y1;
         return v;
     }
 
     double operator*(Vector b){
-        return x * b.x + y * b.y;
+        return (x2 - x1) * (b.x2 - b.x1) + (y2 - y1) * (b.y2 - b.y1);
     }
 };
 
