@@ -25,9 +25,9 @@ public:
     }
 
     static int gcd(int a, int b){
+        a = abs(a);
+        b = abs(b);
         if (a != 0 && b != 0){
-            a = abs(a);
-            b = abs(b);
             while (a != b){
                 if (a > b) a -= b;
                 else b -= a;
@@ -58,7 +58,12 @@ public:
 
     Rational operator+(Rational r){
         if (!(*this).isNaN() && !r.isNaN()){
-            if (this->denum == 0 || r.denum == 0) return Rational(1, 0);
+            if (this->denum == 0 && r.denum == 0){
+                if (this->sign != r.sign) return Rational(0, 0);
+                else if (this->sign == 1 && r.sign == 1) return Rational(1, 0);
+                else return Rational(-1, 0);
+            }else if (this->denum == 0) return Rational(this->sign, 0);
+            else if (r.denum == 0) return Rational(r.sign, 0);
             int a = this->sign * this->num * r.denum + r.sign * r.num * this->denum;
             int b = r.denum * this->denum;
             reduction(a, b);
@@ -69,6 +74,12 @@ public:
 
     Rational operator-(Rational r){
         if (!(*this).isNaN() && !r.isNaN()){
+            if (this->denum == 0 && r.denum == 0){
+                if (this->sign == r.sign) return Rational(0, 0);
+                else if (this->sign == 1 && r.sign == -1) return Rational(1, 0);
+                else return Rational(-1, 0);
+            }else if (this->denum == 0) return Rational(this->sign, 0);
+            else if (r.denum == 0) return Rational(-r.sign, 0);
             int a = this->sign * this->num * r.denum - r.sign * r.num * this->denum;
             int b = r.denum * this->denum;
             reduction(a, b);
@@ -92,12 +103,11 @@ public:
     }
 
     operator double() {
-        if (!(*this).isNaN() && (*this).denum != 0) return this->sign * this->num / this->denum;
-        else return 0;
+        return this->sign * (double)this->num / (double)this->denum;
     }
 
     operator bool() {
-        if ((*this).isNaN() || this->num == 0) return false;
+        if (this->num == 0 && this->denum != 0) return false;
         else return true;
     }
 
