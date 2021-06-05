@@ -74,12 +74,12 @@
 [c28]:https://github.com/Yegor-Balamutin/CFU_tasks/blob/master/Practice/28/C%2B%2B/task28/task28.cpp
 [c29]:https://github.com/Yegor-Balamutin/CFU_tasks/blob/master/Practice/29/C%2B%2B/task29/task29.cpp
 [c30]:https://github.com/Yegor-Balamutin/CFU_tasks/blob/master/Practice/30/C%2B%2B/task30/task30.cpp
-[c33]:https://github.com/Yegor-Balamutin/CFU_tasks/blob/master/Practice/30/C%2B%2B/task30/task33.cpp
-[c34]:https://github.com/Yegor-Balamutin/CFU_tasks/blob/master/Practice/30/C%2B%2B/task30/task34.cpp
-[c35]:https://github.com/Yegor-Balamutin/CFU_tasks/blob/master/Practice/30/C%2B%2B/task30/task35.cpp
-[c36]:https://github.com/Yegor-Balamutin/CFU_tasks/blob/master/Practice/30/C%2B%2B/task30/task36.cpp
-[c37]:https://github.com/Yegor-Balamutin/CFU_tasks/blob/master/Practice/30/C%2B%2B/task30/task37.cpp
-[c38]:https://github.com/Yegor-Balamutin/CFU_tasks/blob/master/Practice/30/C%2B%2B/task30/task38.cpp
+[c33]:https://github.com/Yegor-Balamutin/CFU_tasks/blob/master/Practice/33/C%2B%2B/task30/task33.cpp
+[c34]:https://github.com/Yegor-Balamutin/CFU_tasks/blob/master/Practice/34/C%2B%2B/task30/task34.cpp
+[c35]:https://github.com/Yegor-Balamutin/CFU_tasks/blob/master/Practice/35/C%2B%2B/task30/task35.cpp
+[c36]:https://github.com/Yegor-Balamutin/CFU_tasks/blob/master/Practice/36/C%2B%2B/task30/task36.cpp
+[c37]:https://github.com/Yegor-Balamutin/CFU_tasks/blob/master/Practice/37/C%2B%2B/task30/task37.cpp
+[c38]:https://github.com/Yegor-Balamutin/CFU_tasks/blob/master/Practice/38/C%2B%2B/task30/task38.cpp
 
 [p1]:https://github.com/Yegor-Balamutin/CFU_tasks/blob/master/Practice/01/Python/задание%201.py
 [p2]:https://github.com/Yegor-Balamutin/CFU_tasks/blob/master/Practice/02/Python/задание%202.py
@@ -107,10 +107,10 @@
 [p26]:https://github.com/Yegor-Balamutin/CFU_tasks/blob/master/Practice/26/Python/task26.py
 [p27]:https://github.com/Yegor-Balamutin/CFU_tasks/blob/master/Practice/27/Python/task27.py
 [p28]:https://github.com/Yegor-Balamutin/CFU_tasks/blob/master/Practice/28/Python/task28.py
-[p33]:https://github.com/Yegor-Balamutin/CFU_tasks/blob/master/Practice/28/Python/task33.py
-[p36]:https://github.com/Yegor-Balamutin/CFU_tasks/blob/master/Practice/28/Python/task36.py
-[p37]:https://github.com/Yegor-Balamutin/CFU_tasks/blob/master/Practice/28/Python/task37.py
-[p38]:https://github.com/Yegor-Balamutin/CFU_tasks/blob/master/Practice/28/Python/task38.py
+[p33]:https://github.com/Yegor-Balamutin/CFU_tasks/blob/master/Practice/33/Python/task33.py
+[p36]:https://github.com/Yegor-Balamutin/CFU_tasks/blob/master/Practice/36/Python/task36.py
+[p37]:https://github.com/Yegor-Balamutin/CFU_tasks/blob/master/Practice/37/Python/task37.py
+[p38]:https://github.com/Yegor-Balamutin/CFU_tasks/blob/master/Practice/38/Python/task38.py
 
 [l1]:https://github.com/Yegor-Balamutin/CFU_tasks/tree/master/Lab/Lab%201
 [l2]:https://github.com/Yegor-Balamutin/CFU_tasks/tree/master/Lab/Lab%202

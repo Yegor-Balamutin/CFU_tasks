@@ -140,6 +140,52 @@ class Field:
                         self.battle_field[ship.x][ship.y + i].ship_key = None
                 del self.ships[ship_key]
 
+    def shoot(self, x, y):
+        print("shoot at: ", x, y)
+        if (x < 0 or x > 9 or y < 0 or y > 9): return
+        self.battle_field[x][y].shooted = True
+        if not(self.battle_field[x][y].contains_ship):
+            print("cell not contains ship")
+            return
+        ship_key = self.battle_field[x][y].ship_key
+        if ship_key == None:
+            print("key is None")
+            return
+        else: print("key:",ship_key)
+        dx = abs(int(ship_key[0]) - x)
+        if dx != 0:
+            self.ships[ship_key].parts[dx] = False
+        else:
+            dy = abs(int(ship_key[1]) - y)
+            self.ships[ship_key].parts[dy] = False
+        dead = True
+        for part in self.ships[ship_key].parts:
+            if part: dead = False
+        if dead:
+            def shoot_around(x, y):
+                if x < 9: self.battle_field[x + 1][y].shooted = True
+                if x < 9 and y > 0: self.battle_field[x + 1][y - 1].shooted = True
+                if y > 0: self.battle_field[x][y - 1].shooted = True
+                if x > 0 and y > 0: self.battle_field[x - 1][y - 1].shooted = True
+                if x > 0: self.battle_field[x - 1][y].shooted = True
+                if x > 0 and y < 9: self.battle_field[x - 1][y + 1].shooted = True
+                if y < 9: self.battle_field[x][y + 1].shooted = True
+                if x < 9 and y < 9: self.battle_field[x + 1][y + 1].shooted = True
+                
+            ship = self.ships[ship_key]
+            if ship.orient == 'e':
+                for i in range(ship.size):
+                    shoot_around(ship.x + i, ship.y)
+            elif ship.orient == 'n':
+                for i in range(ship.size):
+                    shoot_around(ship.x, ship.y - i)
+            elif ship.orient == 'w':
+                for i in range(ship.size):
+                    shoot_around(ship.x - i, ship.y)
+            elif ship.orient == 's':
+                for i in range(ship.size):
+                    shoot_around(ship.x, ship.y + i)
+
     def print_field(self):
         for y in range(10):
             for x in range(10):
@@ -199,6 +245,7 @@ def clic_play(event):
         upd_active_games()
         lbl_main_page.pack_forget()
         lbl_choose_game_page.pack()
+    else: show_messege("Fill in all the fields!")
 
 def clic_back_to_p1(event):
     global lbl_main_page, lbl_choose_game_page
@@ -215,7 +262,7 @@ def clic_join_active(event):
     join_game(event.widget.game_id)
 
 def clic_create(event):
-    global lbl_choose_game_page, lbl_preparation_page, game_ID
+    global lbl_choose_game_page, lbl_preparation_page, game_ID, prepare_field, chosen_ship
     try:
         res = requests.post(svr_URL+'create', json={"player_id":player_ID, "player_name":player_name, "webhook":webhook_URL})
     except:
@@ -231,6 +278,7 @@ def clic_create(event):
     list_players[0]['text'] = player_name
     list_players[0].player_id = player_ID
     lbl_game_id['text'] = "ID: " + game_ID
+
     lbl_choose_game_page.pack_forget()
     lbl_preparation_page.pack()
 
@@ -441,6 +489,15 @@ def clic_lbl_ready(event):
     if (len(prepare_field.ships) != 10):
         print("not all ships planted")
         return
+    in_team = False
+    for lbl in list_team_members:
+        if lbl.member_id == player_ID:
+            in_team = True
+            break
+    if not(in_team):
+        print("you are not in team")
+        return
+
     j_ships = []
     for ship in prepare_field.ships.items():
         j_ships.append({"x":ship[1].x, "y":ship[1].y, "size":ship[1].size, "orient":ship[1].orient})
@@ -462,7 +519,59 @@ def clic_lbl_ready(event):
             break
 
 def clic_enemy_field(event):
-    z
+    global turn
+    if turn != player_ID:
+        print("it is not your turn")
+        return
+    if not(cnv_shoots[0].status == 1 
+    	or cnv_shoots[1].status == 1 
+    	or cnv_shoots[2].status == 1 
+    	or cnv_shoots[3].status == 1): return
+
+    x = event.x - 2
+    y = event.y - 2
+    if not(x >= 0 and x <= 249 and y >= 0 and y <= 249): return
+    cell_x = x // 25
+    cell_y = y // 25
+    if event.widget.num == 1: field = enemy_1_field
+    else: field = enemy_2_field
+    if field.battle_field[cell_x][cell_y].shooted: return
+
+    try:
+        res = requests.post(svr_URL+'shoot', 
+            json={"player_id":player_ID, "game_id":game_ID, "target":event.widget.player_id, "x":cell_x, "y":cell_y})
+    except:
+        print("can't make a request")
+        return
+    if res.status_code != 200: return
+    j_res = json.loads(res.text)
+    if "error" in j_res:
+        print(j_res['error'])
+        return
+
+    upd_enemy_field(field, j_res["field"])
+
+    if event.widget.num == 1: draw_field(cnv_enemy_1_field, field, ltl=True)
+    else: draw_field(cnv_enemy_2_field, field, ltl=True)
+
+    turn = j_res['turn']
+    if turn == player_ID:
+        for cnv in cnv_shoots:
+            if cnv.status == 1:
+                cnv.status = 0
+                cnv.delete("all")
+                break
+    else:
+        for cnv in cnv_shoots:
+            if cnv.status == 0:
+                cnv.status = 1
+                cnv.create_image(14, 14, image=shoot_img)
+
+        lbl_names[2]['bg'] = lbl_names[2]['fg']
+        for lbl in lbl_names:
+            if lbl.player_id == turn:
+                lbl['bg'] = "green"
+                break
 
 #------------
 
@@ -516,15 +625,23 @@ def get_name(player_id):
 
 def draw_field(cnv, field, ltl=False):
     cnv.delete("all")
-    if ltl: cell = 25
-    else: cell = 30
+    if ltl:
+        cell = 25
+    else:
+        cell = 30
     for i in range(10):
         cnv.create_line((cell * i, 2), (cell * i, cell * 10 + 2), fill='#00A2E8')
         cnv.create_line((2, cell * i), (cell * 10 + 2, cell * i), fill='#00A2E8')
     for ship in field.ships.items():
         x, y = coords_for_img(ship[1], cell)
         cnv.create_image(x, y, image=ship[1].img)
-    ####### for cells ...
+    for x in range(10):
+        for y in range(10):
+            if field.battle_field[x][y].shooted:
+                if field.battle_field[x][y].contains_ship:
+                    cnv.create_image(x*cell + (cell // 2) + 1, y*cell + (cell // 2) + 1, image=shooted_ship_img)
+                else:
+                    cnv.create_image(x*cell + (cell // 2) + 1, y*cell + (cell // 2) + 1, image=shooted_cell_img)
 
 def bad_place(ship):
     img = ImageTk.getimage(ship.img)
@@ -564,7 +681,7 @@ def create_border_img(img):
     return img
 
 def clear_preparation_page():
-    global prepare_field
+    global prepare_field, chosen_ship
     lbl_game_id['text'] = ""
     for i in range(4):
         list_players[i].player_id = "0"
@@ -585,7 +702,7 @@ def clear_preparation_page():
         cnv.create_image(15, 16, image=ship_1_img_tk)
         cnv.contains_ship = True
 
-    chosen_ship.exist = False
+    chosen_ship = ChosenShip()
     prepare_field = Field()
     draw_field(cnv_prepare_field, prepare_field)
 
@@ -607,6 +724,23 @@ def upd_active_games():
         text = j_res[i]["admin_name"] + " " * (13-len(j_res[i]["admin_name"])) + " ID: " + j_res[i]["game_id"] + "   " + j_res[i]["p_count"] + "/4"
         list_active_games[i]['text'] = text
         list_active_games[i].game_id = j_res[i]["game_id"]
+
+def upd_enemy_field(en_field, j_field):
+    for x in range(10):
+        for y in range(10):
+            shooted = j_field["battle_field"][x][y]["shooted"]
+            contains_ship = j_field["battle_field"][x][y]["contains_ship"]
+            en_field.battle_field[x][y].shooted = shooted
+            en_field.battle_field[x][y].contains_ship = contains_ship
+    en_field.ships = {}
+    for ship in j_field["ships"]:
+        new_ship = Ship(ship['x'], ship['y'], ship['size'], ship['orient'], ltl=True)
+        en_field.ships[str(ship['x'])+str(ship['y'])] = new_ship
+
+def show_messege(msg, command=lambda event: lbl_messege.place_forget()):
+    lbl_messege['text'] = msg
+    lbl_messege.place(x=220, y=200)
+    lbl_messege.bind("<Button-1>", command)
 
 #------------
 
@@ -812,10 +946,6 @@ lbl_ready.bind("<Button-1>", clic_lbl_ready)
 lbl_ready.bind("<Button-3>", clic_auto_set)    #######
 lbl_ready.ready = False
 
-prepare_field = Field()
-chosen_ship = ChosenShip()
-
-draw_field(cnv_prepare_field, prepare_field)
 #-----------
 
 #==[ Battle page ]==========
@@ -832,8 +962,8 @@ ltl_ship_3_img_tk = ImageTk.PhotoImage(ltl_ship_3_img)
 ltl_ship_4_img_tk = ImageTk.PhotoImage(ltl_ship_4_img)
 
 shoot_img = ImageTk.PhotoImage(file="shoot_img.png")
-shooted_cell_img = ImageTk.PhotoImage(file="shooted_cell.png")
-shooted_ship_img = ImageTk.PhotoImage(file="shooted_ship.png")
+shooted_cell_img = ImageTk.PhotoImage(Image.open("shooted_cell.png").resize((24,24)))
+shooted_ship_img = ImageTk.PhotoImage(Image.open("shooted_ship.png").resize((24,24)))
 
 name_box_img = ImageTk.PhotoImage(Image.new("RGB", (180, 25), '#7092BE'))
 
@@ -847,6 +977,9 @@ cnv_enemy_2_field.place(in_=lbl_battle_page, x=460, y=40)
 cnv_my_field.place(in_=lbl_battle_page, x=20, y=350)
 cnv_friend_field.place(in_=lbl_battle_page, x=520, y=350)
 
+cnv_enemy_1_field.num = 1
+cnv_enemy_2_field.num = 2
+
 cnv_enemy_1_field.bind("<Button-1>", clic_enemy_field)
 cnv_enemy_2_field.bind("<Button-1>", clic_enemy_field)
 
@@ -855,26 +988,10 @@ cnv_friend_field.player_id = "0"
 cnv_enemy_1_field.player_id = "0"
 cnv_enemy_2_field.player_id = "0"
 
-def clic1(event):                         ####
-    x = event.x - 2
-    y = event.y - 2
-    if not(x >= 0 and x <= 299 and y >= 0 and y <= 299): return
-    cell_x = x // 25
-    cell_y = y // 25
-    cnv_my_field.create_image(cell_x * 25 + 12, cell_y * 25 + 12, image=shooted_cell_img)
-def clic2(event):                         ####
-    x = event.x - 2
-    y = event.y - 2
-    if not(x >= 0 and x <= 299 and y >= 0 and y <= 299): return
-    cell_x = x // 25
-    cell_y = y // 25
-    cnv_my_field.create_image(cell_x * 25 + 12, cell_y * 25 + 12, image=shooted_ship_img)
-cnv_my_field.bind("<Button-1>", clic1)    ####
-cnv_my_field.bind("<Button-3>", clic2)    ####
-
 lbl_names = []
 for i in range(4):
     lbl_names.append(Tk.Label(root, image=name_box_img, bg='#3A43CC', fg='#3F49CC', text="aaaaa", font="Helvetica 15", compound='center'))
+    lbl_names[i].player_id = "0"
 
 lbl_names[0].place(in_=lbl_battle_page, x=80, y=10)
 lbl_names[1].place(in_=lbl_battle_page, x=460, y=10)
@@ -911,12 +1028,19 @@ cnv_shoots = []
 for i in range(4):
     cnv_shoots.append(Tk.Canvas(root, width=25, height=25, bg='#96D9EA', highlightbackground='#3F49CC'))
     cnv_shoots[i].create_image(14, 14, image=shoot_img)
+    cnv_shoots[i].status = 1   # 1 - available,  0 - used,  -1 - unavailable
 
 cnv_shoots[0].place(in_=lbl_battle_page, x=390, y=380)
 cnv_shoots[1].place(in_=lbl_battle_page, x=450, y=420)
 cnv_shoots[2].place(in_=lbl_battle_page, x=460, y=460)
 cnv_shoots[3].place(in_=lbl_battle_page, x=420, y=500)
 
+#-----------
+
+#==[ Messege label ]==========
+msg_box_img = ImageTk.PhotoImage(Image.new("RGB", (360, 120), '#7092BE'))
+
+lbl_messege = Tk.Label(root, image=msg_box_img, bg='#3A43CC', fg='#3F49CC', font="Helvetica 15", compound='center')
 #-----------
 
 #==[ Flask ]======
@@ -1004,11 +1128,11 @@ def start_game():
 
     for ship in prepare_field.ships.items():
         new_ship = Ship(ship[1].x, ship[1].y, ship[1].size, ship[1].orient, ltl=True)
-        my_field.ships[ship[0]] = new_ship
+        my_field.add(new_ship)
 
     for ship in j_req["friend"]["ships"]:
         new_ship = Ship(ship['x'], ship['y'], ship['size'], ship['orient'], ltl=True)
-        friend_field.ships[str(ship['x'])+str(ship['y'])] = new_ship
+        friend_field.add(new_ship)
 
     cnv_my_field.player_id = player_ID
     cnv_friend_field.player_id = j_req["friend"]["id"]
@@ -1040,6 +1164,138 @@ def start_game():
     lbl_battle_page.pack()
     return "0"
 
+@app.route('/friendshoot', methods=['POST'])
+def friend_shoot():
+    global turn, enemy_1_field, enemy_2_field
+    j_req = request.json
+
+    if cnv_enemy_1_field.player_id == j_req["enemy_id"]:
+        upd_enemy_field(enemy_1_field, j_req["field"])
+        draw_field(cnv_enemy_1_field, enemy_1_field, ltl=True)
+    elif cnv_enemy_2_field.player_id == j_req["enemy_id"]:
+        upd_enemy_field(enemy_2_field, j_req["field"])
+        draw_field(cnv_enemy_2_field, enemy_2_field, ltl=True)
+    else: return "1"
+
+    if j_req["turn"] != turn:
+        for lbl in lbl_names:
+            if lbl.player_id == turn:
+                lbl['bg'] = lbl['fg']
+                break
+
+    turn = j_req["turn"]
+    for lbl in lbl_names:
+        if lbl.player_id == turn:
+            lbl['bg'] = "green"
+            break
+
+    return "0"
+
+@app.route('/enemyshoot', methods=['POST'])
+def enemy_shoot():
+    global turn
+    j_req = request.json
+    x = j_req['x']
+    y = j_req['y']
+
+    if j_req["target_id"] == player_ID:
+        my_field.shoot(x, y)
+        draw_field(cnv_my_field, my_field, ltl=True)
+
+        if my_field.battle_field[x][y].contains_ship:
+            ship_key = my_field.battle_field[x][y].ship_key
+            ship = my_field.ships[ship_key]
+
+            dead = True
+            for part in ship.parts:
+                if part: dead = False
+
+            if dead:
+                if (ship.size == 4):
+                    cnv_ltl_4_ship.alive = False
+                    cnv_shoots[0].status = -1
+                    cnv_ltl_4_ship.create_line(0, 0, 100, 25, fill="red", width=2)
+                    cnv_ltl_4_ship.create_line(0, 25, 100, 0, fill="red", width=2)
+                    cnv_shoots[0].create_line(0, 0, 25, 25, fill="red", width=2)
+                    cnv_shoots[0].create_line(0, 25, 25, 0, fill="red", width=2)
+
+                elif (ship.size == 3):
+                    for cnv in cnv_ltl_3_ships:
+                        if not(cnv.alive): continue
+                        cnv.alive = False
+                        cnv.create_line(0, 0, 75, 25, fill="red", width=2)
+                        cnv.create_line(0, 25, 75, 0, fill="red", width=2)
+                        break
+                    if not(cnv_ltl_3_ships[0].alive or cnv_ltl_3_ships[1].alive):
+                        cnv_shoots[1].status = -1
+                        cnv_shoots[1].create_line(0, 0, 25, 25, fill="red", width=2)
+                        cnv_shoots[1].create_line(0, 25, 25, 0, fill="red", width=2)
+
+                elif (ship.size == 2):
+                    for cnv in cnv_ltl_2_ships:
+                        if not(cnv.alive): continue
+                        cnv.alive = False
+                        cnv.create_line(0, 0, 50, 25, fill="red", width=2)
+                        cnv.create_line(0, 25, 50, 0, fill="red", width=2)
+                        break
+                    if not(cnv_ltl_2_ships[0].alive or cnv_ltl_2_ships[1].alive or cnv_ltl_2_ships[2].alive):
+                        cnv_shoots[2].status = -1
+                        cnv_shoots[2].create_line(0, 0, 25, 25, fill="red", width=2)
+                        cnv_shoots[2].create_line(0, 25, 25, 0, fill="red", width=2)
+
+                elif (ship.size == 1):
+                    for cnv in cnv_ltl_1_ships:
+                        if not(cnv.alive): continue
+                        cnv.alive = False
+                        cnv.create_line(0, 0, 25, 25, fill="red", width=2)
+                        cnv.create_line(0, 25, 25, 0, fill="red", width=2)
+                        break
+                    if not(cnv_ltl_1_ships[0].alive or cnv_ltl_1_ships[1].alive or cnv_ltl_1_ships[2].alive or cnv_ltl_1_ships[3].alive):
+                        cnv_shoots[3].status = -1
+                        cnv_shoots[3].create_line(0, 0, 25, 25, fill="red", width=2)
+                        cnv_shoots[3].create_line(0, 25, 25, 0, fill="red", width=2)
+    else:
+        friend_field.shoot(x, y)
+        draw_field(cnv_friend_field, friend_field, ltl=True)
+
+    if j_req["turn"] != turn:
+        for lbl in lbl_names:
+            if lbl.player_id == turn:
+                lbl['bg'] = lbl['fg']
+                break
+
+    turn = j_req["turn"]
+    for lbl in lbl_names:
+        if lbl.player_id == turn:
+            lbl['bg'] = "green"
+            break
+
+    return "0"
+
+@app.route('/endgame', methods=['POST'])
+def end_game():
+    j_req = request.json
+    if 'error' in j_req:
+        print(j_req['error'])
+        lbl_battle_page.pack_forget()
+        lbl_choose_game_page.pack()
+        upd_active_games()
+        return
+
+    def command(event):
+        lbl_messege.place_forget()
+        lbl_battle_page.pack_forget()
+        lbl_choose_game_page.pack()
+        upd_active_games()
+
+    if turn == player_ID or turn == lbl_names[3].player_id:
+        if red_team: show_messege("Winner: Team B", command)
+        else: show_messege("Winner: Team A", command)
+    else:
+        if red_team: show_messege("Winner: Team A", command)
+        else: show_messege("Winner: Team B", command)
+    return "0"
+
 #-------------
 
 #==[ Threading ]======
@@ -1051,7 +1307,7 @@ class FlaskThread(threading.Thread):
 
    def run(self):
       if __name__ == "__main__":
-         app.run(host='127.0.0.1', port=5000)
+         app.run(host='127.0.0.1', port=0)
 
 app_run = FlaskThread("flask_run", 1)
 #-------------
