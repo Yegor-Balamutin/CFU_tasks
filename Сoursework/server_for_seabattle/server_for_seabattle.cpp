@@ -362,6 +362,7 @@ public:
             data["players"].push_back(json::object());
             data["players"][i]["player_id"] = p.player_id;
             data["players"][i]["player_name"] = p.player_name;
+            data["players"][i]["ready"] = p.ready;
             i++;
         }
         data["team_a"] = json::array();

@@ -599,6 +599,7 @@ def join_game(game_id):
     for player in j_res["players"]:
         list_players[i]['text'] = player["player_name"]
         list_players[i].player_id = player["player_id"]
+        if player["ready"]: list_players[i]['bg'] = 'green'
         i += 1
     if j_res["team_a"][0] != "0":
         list_team_members[0].player_id = j_res["team_a"][0]
@@ -681,11 +682,13 @@ def create_border_img(img):
     return img
 
 def clear_preparation_page():
-    global prepare_field, chosen_ship
+    global prepare_field, chosen_ship, ready
     lbl_game_id['text'] = ""
+    lbl_ready['image'] = ready_img
     for i in range(4):
         list_players[i].player_id = "0"
         list_players[i]['text'] = ". . ."
+        list_players[i]['bg'] = '#3A43CC'
     for i in range(4):
         list_team_members[i].member_id = "0"
         list_team_members[i]['text'] = ". . ."
@@ -702,6 +705,7 @@ def clear_preparation_page():
         cnv.create_image(15, 16, image=ship_1_img_tk)
         cnv.contains_ship = True
 
+    ready = False
     chosen_ship = ChosenShip()
     prepare_field = Field()
     draw_field(cnv_prepare_field, prepare_field)
